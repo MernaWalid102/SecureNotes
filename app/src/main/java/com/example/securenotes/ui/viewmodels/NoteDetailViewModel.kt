@@ -1,6 +1,7 @@
 package com.example.securenotes.ui.viewmodels
 
 import android.content.Context
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -115,9 +116,27 @@ class NoteDetailViewModel(
         }
     }
 
+    fun exportNote(context: Context, uri: Uri) {
+        val s = state.value
+        val text = buildString {
+            appendLine(s.title)
+            appendLine()
+            appendLine(s.body)
+        }
+        try {
+            context.contentResolver.openOutputStream(uri)?.use { out ->
+                out.write(text.toByteArray())
+            }
+            _events.tryEmit(DetailEvent.ExportSuccess)
+        } catch (e: Exception) {
+            _events.tryEmit(DetailEvent.Error("Export failed: ${e.message}"))
+        }
+    }
+
     sealed interface DetailEvent {
         data class Saved(val id: Long) : DetailEvent
         data object Deleted : DetailEvent
+        data object ExportSuccess : DetailEvent
         data class Error(val message: String) : DetailEvent
     }
 
