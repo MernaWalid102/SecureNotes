@@ -1,35 +1,40 @@
-SecureNotes
+Looks clean and professional already 👍
 
-An Android application for securely managing notes, built with Jetpack Compose and DataStore (Proto).
-The app supports dark mode, custom font scaling, and persistent settings.
+Here are a few tweaks that could make your **SecureNotes** README more polished and developer-friendly:
 
- Features
+---
 
- Add, edit, and delete notes
+# SecureNotes
 
- Dark Mode support
+**SecureNotes** is an Android application for securely managing personal notes, built with **Jetpack Compose** and **Proto DataStore**.
+The app provides a simple, modern UI with dark mode, customizable font scaling, and persistent settings storage.
 
- Customizable default font scale
+---
 
- Store settings using Proto DataStore
+## ✨ Features
 
- Migration from legacy SharedPreferences to DataStore
+* ➕ Add, ✏️ Edit, and 🗑️ Delete notes
+* 🌙 Dark Mode support
+* 🔠 Adjustable default font scale
+* 💾 Persistent settings with Proto DataStore
+* 🔄 Migration from SharedPreferences to DataStore
 
- Tech Stack
+---
 
-Kotlin
+## 🛠️ Tech Stack
 
-Jetpack Compose (UI)
+* **Kotlin**
+* **Jetpack Compose** (UI)
+* **Navigation Compose**
+* **ViewModel + StateFlow**
+* **DataStore (Proto)**
+* **Gradle (KTS)**
 
-Navigation Compose
+---
 
-ViewModel + StateFlow
+## 📂 Project Structure
 
-DataStore (Proto)
-
-Gradle (KTS)
-
-Project Structure
+```
 app/
  ├── src/
  │   ├── main/
@@ -40,20 +45,27 @@ app/
  │   │   │   └── settings/          # DataStore (proto + serializer)
  │   │   └── res/                   # Resources (values, drawables, etc.)
  │   └── main/proto/                # settings.proto file
+```
 
- Getting Started
+---
 
-Open the project in Android Studio
+## 🚀 Getting Started
 
-Sync Gradle (Sync Project with Gradle Files)
+1. Open the project in **Android Studio**
+2. Sync Gradle (`Sync Project with Gradle Files`)
+3. Run the app on an emulator or physical device
 
-Run the app on an emulator or a physical device
+---
 
- Notes
+## 📌 Notes
 
-The settings.proto file is located at:
+* The **`settings.proto`** file is located at:
 
-app/src/main/proto/settings.proto
+  ```
+  app/src/main/proto/settings.proto
+  ```
+* The protobuf Gradle plugin automatically generates the `Settings` classes from this file.
 
+---
 
-The protobuf Gradle plugin generates the Settings classes automatically from this file.
+👉 Do you want me to also add **example screenshots** placeholders and maybe a **preview GIF section** so the README looks more appealing for GitHub?
