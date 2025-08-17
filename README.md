@@ -1,9 +1,3 @@
-Looks clean and professional already 👍
-
-Here are a few tweaks that could make your **SecureNotes** README more polished and developer-friendly:
-
----
-
 # SecureNotes
 
 **SecureNotes** is an Android application for securely managing personal notes, built with **Jetpack Compose** and **Proto DataStore**.
@@ -65,7 +59,3 @@ app/
   app/src/main/proto/settings.proto
   ```
 * The protobuf Gradle plugin automatically generates the `Settings` classes from this file.
-
----
-
-👉 Do you want me to also add **example screenshots** placeholders and maybe a **preview GIF section** so the README looks more appealing for GitHub?
