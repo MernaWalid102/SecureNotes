@@ -29,8 +29,7 @@ import com.example.securenotes.ui.viewmodels.NotesViewModel
 @Composable
 fun NotesListScreen(
     onAdd: () -> Unit,
-    onOpen: (Long) -> Unit,
-    onOpenSettings: () -> Unit
+    onOpen: (Long) -> Unit
 ) {
     val context = LocalContext.current
     val vm: NotesViewModel = viewModel(factory = NotesViewModel.Factory(context))

@@ -1,7 +1,6 @@
 package com.example.securenotes.ui
 
 import android.content.Context
-import android.content.SharedPreferences
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
@@ -12,7 +11,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -63,8 +61,7 @@ fun App() {
                 composable("notes") {
                     NotesListScreen(
                         onAdd = { navController.navigate("detail/-1") },
-                        onOpen = { id -> navController.navigate("detail/$id") },
-                        onOpenSettings = { navController.navigate("settings") }
+                        onOpen = { id -> navController.navigate("detail/$id") }
                     )
                 }
                 composable(

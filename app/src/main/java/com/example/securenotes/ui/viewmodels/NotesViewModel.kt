@@ -4,8 +4,9 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.securenotes.data.NoteRepository
+import com.example.securenotes.data.NoteRepositoryImpl
 import com.example.securenotes.domain.Note
+import com.example.securenotes.domain.NoteRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -21,15 +22,13 @@ class NotesViewModel(
 
     init {
         viewModelScope.launch {
-            repository.getNotes().collectLatest {
-                _notes.value = it
-            }
+            repository.getNotes().collectLatest { _notes.value = it }
         }
     }
 
     class Factory(private val context: Context) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            val repo = NoteRepository(context.applicationContext)
+            val repo: NoteRepository = NoteRepositoryImpl(context.applicationContext)
             @Suppress("UNCHECKED_CAST")
             return NotesViewModel(repo) as T
         }

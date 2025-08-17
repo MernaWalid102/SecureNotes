@@ -8,7 +8,7 @@ import com.example.securenotes.domain.Note
 
 @Database(
     entities = [Note::class],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 abstract class AppDatabase : RoomDatabase() {
