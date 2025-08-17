@@ -22,20 +22,23 @@ import com.example.securenotes.ui.viewmodels.NoteDetailViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
 
 import androidx.compose.foundation.layout.width
 
 
+// NoteDetailScreen.kt
 @Composable
 fun NoteDetailScreen(
     noteId: Long?,
     onNavigateBack: () -> Unit
 ) {
     val context = LocalContext.current
-    val vm: NoteDetailViewModel = viewModel(
-        factory = NoteDetailViewModel.Factory(context, noteId)
-    )
+    val vm: NoteDetailViewModel = viewModel(factory = NoteDetailViewModel.Factory(context, noteId))
     val state by vm.state.collectAsStateWithLifecycle()
+    val scope = rememberCoroutineScope()
 
     Column(
         Modifier
@@ -48,8 +51,8 @@ fun NoteDetailScreen(
             onValueChange = vm::updateTitle,
             label = { Text("Title") },
             modifier = Modifier
+                .fillMaxWidth()         // ✅ was fillMaxSize(0f)
                 .padding(bottom = 8.dp)
-                .fillMaxSize(fraction = 0.0f)
         )
         OutlinedTextField(
             value = state.body,
@@ -58,10 +61,11 @@ fun NoteDetailScreen(
             modifier = Modifier
                 .weight(1f)
                 .padding(bottom = 8.dp)
+                .fillMaxWidth()
         )
         Row {
             Button(onClick = {
-                CoroutineScope(Dispatchers.IO).launch {
+                scope.launch {           // ✅ main thread by default
                     vm.save()
                     onNavigateBack()
                 }
@@ -70,7 +74,7 @@ fun NoteDetailScreen(
             }
             Spacer(Modifier.width(16.dp))
             TextButton(onClick = {
-                CoroutineScope(Dispatchers.IO).launch {
+                scope.launch {
                     vm.delete()
                     onNavigateBack()
                 }

@@ -29,13 +29,15 @@ import com.example.securenotes.ui.screens.SettingsScreen
 import com.example.securenotes.ui.theme.SecureNotesTheme
 import com.example.securenotes.ui.viewmodels.SettingsViewModel
 
+// App.kt
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun App() {
     val navController = rememberNavController()
     val context = LocalContext.current
 
-    LaunchedEffect(Unit) { seedLegacyPrefsIfNeeded(context) }
+    // Seed BEFORE DataStore is first created (no LaunchedEffect)
+    seedLegacyPrefsIfNeeded(context)
 
     val settingsVm: SettingsViewModel = viewModel(factory = SettingsViewModel.Factory(context))
     val settings by settingsVm.state.collectAsStateWithLifecycle()
@@ -84,13 +86,14 @@ fun App() {
 }
 
 private fun seedLegacyPrefsIfNeeded(context: Context) {
-    val sp: SharedPreferences = context.getSharedPreferences("legacy_prefs", Context.MODE_PRIVATE)
+    val sp = context.getSharedPreferences("legacy_prefs", Context.MODE_PRIVATE)
     if (!sp.contains("seeded")) {
+        // Use commit() so it's written before DataStore migration runs
         sp.edit()
             .putBoolean("darkMode", false)
             .putFloat("defaultFontScale", 1.0f)
             .putBoolean("autoSave", true)
             .putBoolean("seeded", true)
-            .apply()
+            .commit()
     }
 }
